@@ -4,11 +4,29 @@ server:
   # 访问路径前缀
   servlet:
     context-path: /
+# 数据库配置信息
 spring:
-  # 德鲁伊数据源
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/service-plarform
+    url: jdbc:mysql://localhost:3306/service-platform?serverTimezone=UTC
     username: root
     password: xiaoyu
+# mybatis-plus配置
+mybatis-plus:
+  # 全局设置
+  global-config:
+    db-config:
+      id-type: auto   # id由数据库自增
+  configuration:
+    # Mybatis 默认实体属性名称和数据库字段一一对应
+    # 既数据库字段 user_name
+    # 实体属性字段 也必须是user_name
+    # 但java一般采用驼峰命名 userName
+    # 那么mybatis 为迎合java 特设置这个参数 map-underscore-to-camel-case ： true
+    # 开启驼峰功能，使得user_name==userName
+    map-underscore-to-camel-case: false # 自动开启驼峰命名
+    auto-mapping-behavior: full # 自动映射所有复杂结果
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # mapper.xml文件的位置
+  mapper-locations: classpath:mybatis/mappler/*.xml
