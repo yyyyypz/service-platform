@@ -27,7 +27,7 @@ public class ProductController {
         // 如果查询成功，把数据响应到前端
         if (swiperProducts.size() > 0 && swiperProducts != null) {
             Map<String, Object> resultMap = new HashMap<>();
-            resultMap.put("data", swiperProducts);
+            resultMap.put("datas", swiperProducts);
             return ResponseResult.ok(resultMap);
         }
         return ResponseResult.error("轮播商品为空，请检查！");
