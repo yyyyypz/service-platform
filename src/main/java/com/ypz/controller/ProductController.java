@@ -1,6 +1,7 @@
 package com.ypz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ypz.entity.Product;
 import com.ypz.entity.ResponseResult;
 import com.ypz.service.IProductService;
@@ -31,5 +32,29 @@ public class ProductController {
             return ResponseResult.ok(resultMap);
         }
         return ResponseResult.error("轮播商品为空，请检查！");
+    }
+
+    /**
+     * 查询热卖商品
+     *
+     * @return
+     */
+    @GetMapping("/queryHotProduct")
+    public ResponseResult queryHotProduct() {
+//        // 分页条数，查询前8个热卖商品
+//        Page<Product> page = new Page<>(0, 8);
+//        // 查询条件，isHot表示是否为热卖商品，根据升序排序
+//        QueryWrapper<Product> queryWrapper = new QueryWrapper<Product>().eq("isHot", true).orderByAsc();
+//        // 所有查询条件汇总
+//        Page<Product> pageQueryCondition = iProductService.page(page, queryWrapper);
+//        // 调用查询方法
+        Page<Product> pageQueryCondition = iProductService.page(new Page<Product>(0, 8), new QueryWrapper<Product>().eq("isHot", true).orderByAsc("hotDateTime"));
+        List<Product> hotProducts = pageQueryCondition.getRecords();
+        if (hotProducts != null && hotProducts.size() > 0) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("datas", hotProducts);
+            return ResponseResult.ok(map);
+        }
+        return ResponseResult.error("热卖商品为空，请检查！");
     }
 }
