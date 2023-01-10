@@ -13,5 +13,7 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
         registry.addResourceHandler("/images/swiper/**").addResourceLocations("file:D:\\service-platform-resources\\swiperImages\\");
         // 商品大类图片路径映射
         registry.addResourceHandler("/images/bigType/**").addResourceLocations("file:D:\\service-platform-resources\\bigTypeImages\\");
+        // 热卖商品图片路径映射
+        registry.addResourceHandler("/images/hotProduct/**").addResourceLocations("file:D:\\service-platform-resources\\productImages\\");
     }
 }
