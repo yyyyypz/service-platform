@@ -1,7 +1,10 @@
 package com.ypz.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
+import java.util.List;
 
 @TableName("t_bigtype")
 @Data
@@ -45,4 +48,7 @@ public class BigType {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @TableField(select=false)
+    private List<SmallType> smallTypeList; // 商品小类集合
 }
