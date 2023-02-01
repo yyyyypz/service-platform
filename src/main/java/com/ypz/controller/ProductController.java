@@ -1,12 +1,16 @@
 package com.ypz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ypz.entity.Product;
+import com.ypz.entity.ProductSwiperImage;
 import com.ypz.entity.ResponseResult;
 import com.ypz.service.IProductService;
+import com.ypz.service.IProductSwiperImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +24,8 @@ public class ProductController {
     // 自动装配service层实体（控制反转）
     @Autowired
     private IProductService iProductService;
+    @Autowired
+    private IProductSwiperImageService iProductSwiperImageService;
 
     @GetMapping("/querySwiper")
     public ResponseResult querySwiper() {
@@ -56,5 +62,20 @@ public class ProductController {
             return ResponseResult.ok(map);
         }
         return ResponseResult.error("热卖商品为空，请检查！");
+    }
+
+    @GetMapping("/queryProductDetail")
+    public ResponseResult queryDetail(Integer id) {
+        // 根据id查询商品信息
+        Product product = iProductService.getById(id);
+        // 根据商品详情图片和商品的主外键关系查询商品图片，并且对图片进行排序
+        List<ProductSwiperImage> productSwiperImages = iProductSwiperImageService.list(new QueryWrapper<ProductSwiperImage>().eq("productId", product.getId()).orderByAsc("sort"));
+        // 封装图片信息
+        product.setProductSwiperImages(productSwiperImages);
+        Map<String, Object> map = new HashMap<>();
+        // 将商品信息封装到map集合当中
+        map.put("datas", product);
+        // 响应
+        return ResponseResult.ok(map);
     }
 }
