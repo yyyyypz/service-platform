@@ -1,6 +1,9 @@
 package com.ypz.config;
 
+import com.ypz.interceptor.SysInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,5 +24,22 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
         registry.addResourceHandler("/images/productIntroImgs/**").addResourceLocations("file:D:\\service-platform-resources\\productIntroImgs\\");
         // 商品详情规格图片路径映射
         registry.addResourceHandler("/images/productParaImgs/**").addResourceLocations("file:D:\\service-platform-resources\\productParaImgs\\");
+    }
+
+    // 将拦截器类添加到bean中
+    @Bean
+    public SysInterceptor sysInterceptor() {
+        return new SysInterceptor();
+//        return null;
+    }
+
+    // 添加拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 定义排除拦截的请求路径
+        String[] patterns = new String[]{"/adminLogin", "/product/**", "/bigType/**", "/user/wxlogin", "/weixinpay/**"};
+        registry.addInterceptor(sysInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns(patterns);
     }
 }
