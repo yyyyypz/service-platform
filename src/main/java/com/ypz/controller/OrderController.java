@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/my/order")
 public class OrderController {
+    private static final Integer ALL_ORDER = 0; // 所有订单
     @Autowired
     private IOrderService orderService;
 
@@ -75,6 +77,24 @@ public class OrderController {
             return ResponseResult.ok("支付成功！");
         }
         return ResponseResult.error("支付失败，该单据已被支付或为查询到该订单，请检查！");
+    }
+
+    @RequestMapping("queryAllOrder")
+    public ResponseResult queryAllOrder(Integer type) {
+        // 所有订单集合
+        List<Order> orders = null;
+        // 响应map
+        Map<String, Object> resultMap = new HashMap<>();
+        if (type == ALL_ORDER) {
+            // 根据插入到数据库的时间降序排序
+            orders = orderService.list(new QueryWrapper<Order>().orderByDesc("id"));
+        } else {
+            // 根据status订单类型查询订单
+            orders = orderService.list(new QueryWrapper<Order>().eq("status", type).orderByDesc("id"));
+        }
+        resultMap.put("datas", orders);
+
+        return ResponseResult.ok(resultMap);
     }
 
 }

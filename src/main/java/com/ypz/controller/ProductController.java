@@ -78,4 +78,15 @@ public class ProductController {
         // 响应
         return ResponseResult.ok(map);
     }
+
+    @GetMapping("/search")
+    public ResponseResult search(String queryParam) {
+        // 根据商品名称模糊进行模糊查询
+        List<Product> products = iProductService.list(new QueryWrapper<Product>().like("name", queryParam));
+        // 创建map进行数据封装
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("datas", products);
+        // 将数据响应个前端
+        return ResponseResult.ok(resultMap);
+    }
 }
