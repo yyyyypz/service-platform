@@ -3,6 +3,7 @@ package com.ypz.config;
 import com.ypz.interceptor.SysInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -37,9 +38,19 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 定义排除拦截的请求路径
-        String[] patterns = new String[]{"/adminLogin", "/product/**", "/bigType/**", "/user/wxlogin", "/weixinpay/**"};
+        String[] patterns = new String[]{"/adminLogin", "/product/**", "/bigType/**", "/user/wxlogin", "/weixinpay/**", "/houseBigType/**", "/house/**"};
         registry.addInterceptor(sysInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns(patterns);
+    }
+
+    // 解决前端请求跨域问题
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
+                .maxAge(3600);
     }
 }
