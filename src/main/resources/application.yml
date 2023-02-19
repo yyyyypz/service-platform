@@ -36,3 +36,5 @@ weixin:
   jscode2sessionUrl: https://api.weixin.qq.com/sns/jscode2session
   appid: wx4227773f52333f55
   secret: b75b82e0a9950925b7ce29a227920fbc
+
+bigTypeImagesFilePath: D:\service-platform-resources\bigTypeImages

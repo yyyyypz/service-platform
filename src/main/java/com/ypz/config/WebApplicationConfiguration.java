@@ -38,7 +38,7 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 定义排除拦截的请求路径
-        String[] patterns = new String[]{"/doctor/**", "/hospital/**", "/adminLogin", "/product/**", "/bigType/**", "/user/wxlogin", "/weixinpay/**", "/houseBigType/**", "/house/**"};
+        String[] patterns = new String[]{"/news/queryDetail/**", "/news/**", "/doctor/**", "/hospital/**", "/adminLogin", "/product/**", "/bigType/**", "/user/wxlogin", "/weixinpay/**", "/houseBigType/**", "/house/**"};
         registry.addInterceptor(sysInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns(patterns);
