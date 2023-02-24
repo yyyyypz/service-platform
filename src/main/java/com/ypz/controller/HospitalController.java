@@ -17,6 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 查询可预约医生列表数据
+ * @author ypz
+ */
 @RestController
 @RequestMapping("/hospital")
 public class HospitalController {

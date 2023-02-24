@@ -15,6 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 查看房源详情
+ * @author ypz
+ */
 @RestController
 @RequestMapping("/house")
 public class HouseController {

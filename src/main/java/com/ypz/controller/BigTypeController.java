@@ -17,6 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 商品数据查询
+ * @author ypz
+ */
 @RestController
 @RequestMapping("/bigType")
 public class BigTypeController {

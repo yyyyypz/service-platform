@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 查看新闻详情
+ * @author ypz
+ */
 @RestController
 @RequestMapping("/news")
 public class NewsController {

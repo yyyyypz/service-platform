@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 商品接口
+ * @author ypz
+ */
 @RestController  // restFul风格
 @RequestMapping("/product")  // 指定模块访问前缀
 public class ProductController {

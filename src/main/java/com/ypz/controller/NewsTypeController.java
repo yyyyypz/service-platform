@@ -15,6 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 查询所有新闻数据
+ * @author ypz
+ */
 @RestController
 @RequestMapping("/news")
 public class NewsTypeController {

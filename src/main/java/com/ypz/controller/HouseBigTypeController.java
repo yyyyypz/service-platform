@@ -27,6 +27,10 @@ public class HouseBigTypeController {
     @Autowired
     private IHouseService houseService;
 
+    /**
+     * 查看医生列表数
+     * @return
+     */
     @GetMapping("/queryCategories")
     public ResponseResult queryCategories() {
         // 查询房屋大类

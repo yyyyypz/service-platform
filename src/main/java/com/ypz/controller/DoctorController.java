@@ -15,6 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 查看医生简介
+ * @author ypz
+ */
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {

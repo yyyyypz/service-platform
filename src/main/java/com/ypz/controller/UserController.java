@@ -19,6 +19,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 微信用户授权登录
+ * @author ypz
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
